@@ -13,8 +13,8 @@ public class IRole implements Role, Permissible {
     private int denyPermissions;
     private int id;
 
-    private List<Permission> allowedPermissions = new ArrayList<Permission>();
-    private List<Permission> deniedPermissions = new ArrayList<Permission>();
+    //private List<Permission> allowedPermissions = new ArrayList<Permission>();
+    //private List<Permission> deniedPermissions = new ArrayList<Permission>();
 
     private String name;
     private boolean mentionable;
