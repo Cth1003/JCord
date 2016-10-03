@@ -6,8 +6,20 @@ public interface Channel {
 
     void setName(String n);
 
-    //Permissions getPermissions();
+    int getPosition();
 
-    //void setPermissions(Permissions p);
+    void setPosition(int position);
+
+    void setBitrate(int bitrate);
+
+    int getBitrate();
+
+    void setUserLimit(int userLimit);
+
+    int userLimit();
+
+    String createInstantInvite();
+
+    boolean deleteInstantInvite(String code);
 
 }

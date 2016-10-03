@@ -2,19 +2,18 @@ package com.TheUltimatePleb.JCord.entity.util;
 
 import com.TheUltimatePleb.JCord.entity.Permissible;
 import com.TheUltimatePleb.JCord.entity.Role;
+import com.TheUltimatePleb.JCord.entity.Server;
 
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class IRole implements Role, Permissible {
 
-    private int allowPermissions;
-    private int denyPermissions;
+    private int[] allowPermissions;
+    private int[] denyPermissions;
     private int id;
-
-    //private List<Permission> allowedPermissions = new ArrayList<Permission>();
-    //private List<Permission> deniedPermissions = new ArrayList<Permission>();
 
     private String name;
     private boolean mentionable;
@@ -30,8 +29,11 @@ public class IRole implements Role, Permissible {
     }
 
     public void setPermission(Permission p, boolean allow) {
-        if(allow) {
 
+        if(allow) {
+            if(!IntStream.of(allowPermissions).anyMatch(x -> x == p.getBit())) {
+
+            }
         }
 
     }
@@ -67,4 +69,9 @@ public class IRole implements Role, Permissible {
     public void setColor(Color color) {
         this.color = color;
     }
+
+    public IRole(int id, Server s) {
+
+    }
+
 }
