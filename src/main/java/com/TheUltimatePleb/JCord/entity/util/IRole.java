@@ -1,16 +1,12 @@
 package com.TheUltimatePleb.JCord.entity.util;
 
+import com.TheUltimatePleb.JCord.DiscordAPI;
 import com.TheUltimatePleb.JCord.entity.Permissible;
 import com.TheUltimatePleb.JCord.entity.Role;
 import com.TheUltimatePleb.JCord.entity.Server;
-import com.sun.istack.internal.NotNull;
 
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
+import java.awt.*;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class IRole implements Role, Permissible {
 
@@ -23,6 +19,16 @@ public class IRole implements Role, Permissible {
     private boolean displaySeparately;
     private Color color;
 
+    private DiscordAPI api;
+
+    public IRole(String roleName) {
+
+    }
+
+    public IRole(int id, Server s) {
+
+    }
+
     public int getId() {
         return id;
     }
@@ -32,24 +38,25 @@ public class IRole implements Role, Permissible {
     }
 
     public void setPermission(Permission p, boolean allow) {
-        if(p == null)
+        if (p == null)
             throw new NullPointerException("Permission cannot be null");
-        if(allow) {
-            if(!allowPermissions.contains(p.getBit())) {
-                if(denyPermissions.contains(p.getBit()))
-                    denyPermissions.remove(p.getBit());
+        if (allow) {
+            if (!allowPermissions.contains(p.getBit())) {
+                if (denyPermissions.contains(p.getBit())) denyPermissions.remove(p.getBit());
 
                 allowPermissions.add(p.getBit());
-                return;
+            }
+        } else {
+            if (!denyPermissions.contains(p.getBit())) {
+                if (allowPermissions.contains(p.getBit())) allowPermissions.remove(p.getBit());
+
+                denyPermissions.add(p.getBit());
             }
         }
-        if(!denyPermissions.contains(p.getBit())) {
-            if(allowPermissions.contains(p.getBit()))
-                allowPermissions.remove(p.getBit());
 
-            denyPermissions.add(p.getBit());
-            return;
-        }
+        int allowI = allowPermissions.stream().mapToInt(Integer::intValue).sum();
+        int denyI = denyPermissions.stream().mapToInt(Integer::intValue).sum();
+
     }
 
     public String getName() {
@@ -82,10 +89,6 @@ public class IRole implements Role, Permissible {
 
     public void setColor(Color color) {
         this.color = color;
-    }
-
-    public IRole(int id, Server s) {
-
     }
 
 }
