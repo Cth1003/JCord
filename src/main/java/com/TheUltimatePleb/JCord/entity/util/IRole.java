@@ -3,16 +3,19 @@ package com.TheUltimatePleb.JCord.entity.util;
 import com.TheUltimatePleb.JCord.entity.Permissible;
 import com.TheUltimatePleb.JCord.entity.Role;
 import com.TheUltimatePleb.JCord.entity.Server;
+import com.sun.istack.internal.NotNull;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.IntStream;
 
 public class IRole implements Role, Permissible {
 
-    private int[] allowPermissions;
-    private int[] denyPermissions;
+    private List<Integer> allowPermissions;
+    private List<Integer> denyPermissions;
     private int id;
 
     private String name;
@@ -25,17 +28,28 @@ public class IRole implements Role, Permissible {
     }
 
     public void setPermission(Role r, Permission p, boolean bool) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("Please use setPermission(Permission p, boolean allow); for settings permissions for a role");
     }
 
     public void setPermission(Permission p, boolean allow) {
-
+        if(p == null)
+            throw new NullPointerException("Permission cannot be null");
         if(allow) {
-            if(!IntStream.of(allowPermissions).anyMatch(x -> x == p.getBit())) {
+            if(!allowPermissions.contains(p.getBit())) {
+                if(denyPermissions.contains(p.getBit()))
+                    denyPermissions.remove(p.getBit());
 
+                allowPermissions.add(p.getBit());
+                return;
             }
         }
+        if(!denyPermissions.contains(p.getBit())) {
+            if(allowPermissions.contains(p.getBit()))
+                allowPermissions.remove(p.getBit());
 
+            denyPermissions.add(p.getBit());
+            return;
+        }
     }
 
     public String getName() {
