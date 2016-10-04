@@ -16,6 +16,6 @@ public class IDiscordAPI implements com.TheUltimatePleb.JCord.DiscordAPI {
 
     @Override
     public WebUtils getWebUtils() {
-        return wb == null ? new WebUtils() : wb; //Remember this is called Ternary, hopefully I won't forget now
+        return wb == null ? wb = new WebUtils() : wb; //Remember this is called Ternary, hopefully I won't forget now
     }
 }
