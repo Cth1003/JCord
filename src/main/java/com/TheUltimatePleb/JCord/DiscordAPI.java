@@ -8,6 +8,4 @@ public interface DiscordAPI {
 
     void loginAsUser(String email, String password);
 
-    WebUtils getWebUtils();
-
 }

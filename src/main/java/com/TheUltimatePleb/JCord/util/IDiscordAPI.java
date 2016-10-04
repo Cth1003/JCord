@@ -13,9 +13,4 @@ public class IDiscordAPI implements com.TheUltimatePleb.JCord.DiscordAPI {
     public void loginAsUser(String email, String password) {
 
     }
-
-    @Override
-    public WebUtils getWebUtils() {
-        return wb == null ? wb = new WebUtils() : wb; //Remember this is called Ternary, hopefully I won't forget now
-    }
 }

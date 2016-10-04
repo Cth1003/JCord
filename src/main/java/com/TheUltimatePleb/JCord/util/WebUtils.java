@@ -13,9 +13,7 @@ import java.nio.charset.Charset;
 
 public class WebUtils {
 
-    static WebUtils wb;
-
-    public JSONObject getPostResponse(String url, JSONObject body) {
+    public static JSONObject getPostResponse(String url, JSONObject body) {
         try {
             HttpResponse<JsonNode> re = Unirest.post("https://discordapp.com/api/" + url).body(body).asJson();
             JSONObject obj = re.getBody().getObject();
@@ -26,7 +24,7 @@ public class WebUtils {
         }
     }
 
-    public JSONObject getGetResponse(String url) {
+    public static JSONObject getGetResponse(String url) {
         try {
             GetRequest get = Unirest.get("https://discordapp.com/api/" + url);
             JSONObject obj = new JSONObject();
