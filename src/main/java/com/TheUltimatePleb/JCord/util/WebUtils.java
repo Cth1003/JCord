@@ -24,6 +24,17 @@ public class WebUtils {
         }
     }
 
+    public static JSONObject postWithHeader(String url, String v1, String v2) {
+        try {
+            HttpResponse<JsonNode> re = Unirest.post("https://discordapp.com/api/" + url).header(v1, v2).asJson();
+            JSONObject obj = re.getBody().getObject();
+            return obj;
+        } catch (UnirestException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
     public static JSONObject getGetResponse(String url) {
         try {
             GetRequest get = Unirest.get("https://discordapp.com/api/" + url);
